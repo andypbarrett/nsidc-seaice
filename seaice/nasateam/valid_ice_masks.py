@@ -1,7 +1,7 @@
 # Information about the default locations of valid ice mask data
 
 
-NORTH_VALID_ICE_MASK_DIR = '/projects/DATASETS/nsidc0622_valid_seaice_masks/'
+NORTH_VALID_ICE_MASK_DIR = './data/nsidc0622_valid_seaice_masks/'
 NORTH_INVALID_ICE_MASK_VARIABLE_NAME = 'valid_ice_flag'
 NORTH_MASK = {
     'ocean': 0,
