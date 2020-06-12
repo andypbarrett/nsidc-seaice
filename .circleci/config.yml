@@ -1,0 +1,62 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/seaice
+    docker:
+      - image: continuumio/miniconda3:4.6.14
+    steps:
+      - checkout
+      - run:
+          name: Configure Conda
+          command: .circleci/configure_conda.sh
+      - run:
+          name: Install libgl (required for pandas & matplotlib - https://github.com/ContinuumIO/docker-images/issues/49)
+          command: apt update && apt install -y libgl1-mesa-glx
+      - run:
+          name: Build Package
+          command: source activate build && BUILD_NUMBER=0 conda build recipe/
+      - store_artifacts:        # Only needed if you want to get them from the circleci interface
+          path: /opt/conda/envs/build/conda-bld/linux-64/
+          destination: ~/seaice/artifacts
+      - persist_to_workspace:
+          root: /opt
+          paths:
+            - conda/envs/build/
+
+
+  publish-to-main:
+    working_directory: ~/seaice
+    docker:
+      - image: continuumio/miniconda3:4.6.14
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /opt
+      - run:
+          name: publish to anaconda.org main channel
+          command: |
+            source activate build
+
+            for ARTIFACT in $(ls /opt/conda/envs/build/conda-bld/linux-64/*.tar.bz2) ; do
+                invoke deploy.anaconda main $ANACONDA_TOKEN ${ARTIFACT}
+            done
+
+
+workflows:
+  version: 2
+  build-all-and-deploy-releases:
+    jobs:
+      - build:
+          filters:
+            tags:
+               only: /.*/
+
+      - publish-to-main:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          context: org-global

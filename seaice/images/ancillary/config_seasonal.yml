@@ -1,0 +1,235 @@
+# configuration for seasonal trend images, largely copied from config.yml
+
+image_labels:
+  - title
+  - attribution
+  - source_attribution
+
+north:
+  colorbar:
+    axes: [.83, .046, .03, .8]  # left, bottom, width, height
+  image:
+    axes: [.0381, .046, .7238, .896]  # left, bottom, width, height
+    locations:
+      - 'name': Greenland
+        'coords': [-43.6043, 77.2]
+      - 'name': Alaska
+        'coords': [-149.49, 65.2008]
+      - 'name': Russia
+        'coords': [145., 67.]
+      - 'name': Canada
+        'coords': [-102, 58]
+      - 'name': Europe
+        'coords': [6, 51.5]
+    locations_text_kwargs:
+      fontsize: 7
+      horizontalalignment: center
+  attribution:
+    position: [.812, .046]     # [image.axes[left+width]+nudge(.05N/.039S), image.axes[bottom]]
+  source_attribution:
+    position: [.0381, .046]    # [image.axes[left], image.axes[bottom]]
+  sub-title:
+    position: [0.4, 0.038]     # [image.axes[left] + (image.axes[width] * 0.5) , image.axes[bottom]-nudge(0.008)]
+
+  projection:
+    pixel_width: 25000
+    pixel_height: 25000
+    ccrs:                       # parameters passed to cartopy
+      central_latitude: 90.0
+      central_longitude: -45.0
+      false_easting: 0.0
+      false_northing: 0.0
+      true_scale_latitude: 70
+      globe:
+    bounds: [-3850000.000, 3750000., -5350000., 5850000.000]
+
+south:
+  colorbar:
+    axes: [.83, .16, .03, .664]
+  image:
+    axes: [0.0286, 0.16, 0.752, 0.664]
+    locations:
+      - 'name': "West\nAntarctica"
+        'coords': [-126., -81, ]
+      - 'name': "East\nAntarctica"
+        'coords': [52., -77., ]
+      - 'name': "South America"
+        'coords': [-75.5, -55.25]
+        'rotation': vertical
+    locations_text_kwargs:
+      fontsize: 8
+      horizontalalignment: center
+      multialignment: left
+  attribution:
+    position: [.819, .16]
+  source_attribution:
+    position: [0.0286, .16]
+  sub-title:
+    position: [0.4046, 0.152]
+
+  projection:
+    pixel_width: 25000
+    pixel_height: 25000
+    ccrs:
+      central_latitude: -90.0
+      central_longitude: 0.0
+      false_easting: 0.0
+      false_northing: 0.0
+      true_scale_latitude: -70
+      globe:
+    bounds: [-3950000.000, 3950000.000, -3950000.000, 4350000.000]
+
+trend:
+  output_postfix: trend
+  image:
+    locations_path_effects:
+      # Set to a list of dictionaries with 'name' found in image.locations and
+      # 'foreground' the color you want under your text.color
+      - 'name': 'Europe'
+        'foreground': '#777777'
+
+  south:
+    image:                        # Same as ANOMALY
+      locations:
+        - 'name': "West\nAntarctica"
+          'coords': [-126., -81, ]
+        - 'name': "East\nAntarctica"
+          'coords': [52., -77., ]
+        - 'name': "South America"
+          'coords': [-75.5, -55.25]
+          'rotation': vertical
+          'color': black
+
+  title:                   # Same as ANOMALY + word change
+    position: [.038, .953]        # [north.image.axes[left]ish, north.image.axes[bottom+height+nudge]
+    text: Sea Ice Concentration Trends, {date}
+    kwargs:
+      fontsize: 15.
+      color: white
+
+  north:
+    legend:
+      namedcolor_name: 'pole'
+      edgecolor: 'black'
+      text: 'Area not imaged by sensor'
+      text_color: 'black'
+      fontsize: 8
+      loc: 'lower right'
+      handlesize: 1
+
+  monthly:
+    namedcolors:
+      pole: '#bbbbbb'
+
+  colorbar:
+    extend: 'both'
+    tick_color: w
+    tick_fontsize: 8
+    bounds: [0,  24]
+    ticks: [-20., -18., -16., -14., -12., -10, -8., -6., -4., -2., 0., 2., 4., 6., 8., 10., 12., 14., 16., 18., 20.]
+    label:
+      text: per decade
+      kwargs:
+        fontsize: 8.
+        color: w
+
+  colortable:
+    - '#053061'
+    - '#114781'
+    - '#1d5fa2'
+    - '#2b73b3'
+    - '#3a87bd'
+    - '#4f9bc7'
+    - '#71b0d3'
+    - '#93c6de'
+    - '#b1d5e7'
+    - '#cce2ef'
+    - '#deebf2'
+    - 'white'   # '#eff3f5'
+    - '#f8f1ed'
+    - '#fbe5d8'
+    - '#fcd7c2'
+    - '#f8bfa4'
+    - '#f4a683'
+    - '#e8896c'
+    - '#db6b55'
+    - '#cc4c44'
+    - '#bd2d35'
+    - '#a81529'
+    - '#870a24'
+    - '{pole}'    # 251pole'
+    - 'black'     # 252unused'
+    - '{coast}'   # 253coast'
+    - '{land}'    # 254land'
+    - '{missing}' # 255missing'
+
+  colorbounds:
+    - -100.0
+    - -20.0
+    - -18.0
+    - -16.0
+    - -14.0
+    - -12.0
+    - -10.0
+    - -8.0
+    - -6.0
+    - -4.0
+    - -2.0
+    - -0.001
+    - 0.001
+    - 2.0
+    - 4.0
+    - 6.0
+    - 8.0
+    - 10.0
+    - 12.0
+    - 14.0
+    - 16.0
+    - 18.0
+    - 20.0
+    - 100.0001
+    - 251.001
+    - 252.001
+    - 253.001
+    - 254.001
+    - 255.001
+
+# Keys common to all images, and always at top level
+# --------------------------------------------------
+namedcolors:
+  background: '#4f4f4f'
+  ocean: '#093c70'
+  lake: '#133399'
+  pole:  '#bbbbbb'
+  coast: 'black'
+  land: '#777777'
+  missing: '#e9cb00'
+
+attribution:
+  text: National Snow and Ice Data Center, University of Colorado Boulder
+  kwargs:
+    fontsize: 8.
+    rotation: 90
+    color: white
+    horizontalalignment: right
+    verticalalignment: bottom
+
+source_attribution:
+  text: ''
+  kwargs:
+    fontsize: 8.
+    rotation: 90.
+    color: white
+    horizontalalignment: right
+    verticalalignment: bottom
+
+canvas:
+  pixel_dims: [420, 500]
+  dpi: 72
+  # Scale is applied to pixel_dims and any key with 'fontsize' in it.
+  # this allows multiple sizes to be generated.
+  scale: 1.0
+  # contour_width is the linewidth of drawn contours (median extent line)
+  # This is also scaled according to the scale factor define above.
+  contour_width: 1
+  hires_factor: 3.48

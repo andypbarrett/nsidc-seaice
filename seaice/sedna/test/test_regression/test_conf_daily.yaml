@@ -1,0 +1,7 @@
+'extent_threshold': 15
+'interpolation_radius': 0
+'search_paths':
+  - ../../../../test_data/sedna/
+'pole_hole_value': 251
+'data_store': test_daily.p
+'regional_masks': []

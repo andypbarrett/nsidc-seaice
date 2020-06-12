@@ -1,0 +1,7 @@
+date,total_extent_km2,total_area_km2,missing_km2,hemisphere,filename,source_dataset,failed_qa
+1978-10-26,10231387.0,7705753.0,0.0,N,['/projects/DATASETS/nsidc0051_gsfc_nasateam_seaice/final-gsfc/north/daily/1978/nt_19781026_n07_v1.1_n.bin'],nsidc-0051,False
+1978-10-26,17624457.0,13399033.0,0.0,S,['/projects/DATASETS/nsidc0051_gsfc_nasateam_seaice/final-gsfc/south/daily/1978/nt_19781026_n07_v1.1_s.bin'],nsidc-0051,False
+1981-10-26,10231387.0,7705753.0,0.0,N,['/projects/DATASETS/nsidc0051_gsfc_nasateam_seaice/final-gsfc/north/daily/1981/nt_19811026_n07_v1.1_n.bin'],nsidc-0051,False
+1981-10-26,17624457.0,13399033.0,0.0,S,['/projects/DATASETS/nsidc0051_gsfc_nasateam_seaice/final-gsfc/south/daily/1981/nt_19811026_n07_v1.1_s.bin'],nsidc-0051,False
+2016-01-25,13757460.0,11942870.0,0.0,N,"['/projects/DATASETS/nsidc0081_nrt_nasateam_seaice/north/nt_20160124_f17_nrt_n.bin', '/projects/DATASETS/nsidc0081_nrt_nasateam_seaice/north/nt_20160125_f17_nrt_n.bin']",nsidc-0081,False
+2016-01-25,3561544.0,2391347.0,0.0,S,"['/projects/DATASETS/nsidc0081_nrt_nasateam_seaice/south/nt_20160124_f17_nrt_s.bin', '/projects/DATASETS/nsidc0081_nrt_nasateam_seaice/south/nt_20160125_f17_nrt_s.bin']",nsidc-0081,False

@@ -1,0 +1,2 @@
+class SeaIceShapefilesError(Exception):
+    pass

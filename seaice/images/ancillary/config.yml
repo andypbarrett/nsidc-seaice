@@ -1,0 +1,738 @@
+# Config for processing sea ice images for sea ice index.
+
+# This config is designed to be modified by the seaiceimages.config module
+# before being passed in its final state to the seaiceimages.image routines.
+
+# Keys are promoted to the top level with some rules.
+
+# 1. The hemisphere merged first: ['north', 'south']
+# 2. The image_type key is merged next: ['concentration', 'extent'].
+# 3. The temporality key is merged next: ['daily', 'monthly']
+
+# The agreement is that no keys in the image type tree should overwrite
+# the keys in the existing tree.  ['title', 'colortable', 'colorbounds']
+
+# Merging of keys:
+#
+# Unique Key: If a parent dict doesn't have a key that the merge
+# dict does, the parent dict is updated with the key/value from the
+# merge dict.
+#
+# Shared keys: When a key exists in both the parent and merge dict, if both
+# values are dicts, the parent dict is updated with the values from the merge
+# dict.
+#
+# Otherwise, if either key's value is not a dict, an error is raised to prevent
+# accidentaly clobbering a dictionary.
+
+# matplotlib 'axes' are described by a 0-1 normalized rectangle [left, bottom, width, height]
+# The north.image.axes: are computed to create a normalized rect with aspect ratio pixel_dims: [304, 448]
+# The south.image.axes: are computed to create a normalized rect with aspect ratio pixel_dims: [304, 448]
+
+
+north:
+  colorbar:
+    axes: [.83, .046, .03, .8]  # left, bottom, width, height
+  image:
+    axes: [.0381, .046, .7238, .896]  # left, bottom, width, height
+    locations:
+      - 'name': Greenland
+        'coords': [-43.6043, 77.2]
+      - 'name': Alaska
+        'coords': [-149.49, 65.2008]
+      - 'name': Russia
+        'coords': [145., 67.]
+      - 'name': Canada
+        'coords': [-102, 58]
+      - 'name': Europe
+        'coords': [6, 51.5]
+    locations_text_kwargs:
+      fontsize: 7
+      horizontalalignment: center
+  attribution:
+    position: [.812, .046]     # [image.axes[left+width]+nudge(.05N/.039S), image.axes[bottom]]
+  source_attribution:
+    position: [.0381, .046]    # [image.axes[left], image.axes[bottom]]
+  sub-title:
+    position: [0.4, 0.038]     # [image.axes[left] + (image.axes[width] * 0.5) , image.axes[bottom]-nudge(0.008)]
+
+  projection:
+    pixel_width: 25000
+    pixel_height: 25000
+    ccrs:                       # parameters passed to cartopy
+      central_latitude: 90.0
+      central_longitude: -45.0
+      false_easting: 0.0
+      false_northing: 0.0
+      true_scale_latitude: 70
+      globe:
+    bounds: [-3850000.000, 3750000., -5350000., 5850000.000]
+
+
+south:
+  colorbar:
+    axes: [.83, .16, .03, .664]
+  image:
+    axes: [0.0286, 0.16, 0.752, 0.664]
+    locations:
+      - 'name': "West\nAntarctica"
+        'coords': [-126., -81, ]
+      - 'name': "East\nAntarctica"
+        'coords': [52., -77., ]
+      - 'name': "South America"
+        'coords': [-75.5, -55.25]
+        'rotation': vertical
+    locations_text_kwargs:
+      fontsize: 8
+      horizontalalignment: center
+      multialignment: left
+  attribution:
+    position: [.819, .16]
+  source_attribution:
+    position: [0.0286, .16]
+  sub-title:
+    position: [0.4046, 0.152]
+
+  projection:
+    pixel_width: 25000
+    pixel_height: 25000
+    ccrs:
+      central_latitude: -90.0
+      central_longitude: 0.0
+      false_easting: 0.0
+      false_northing: 0.0
+      true_scale_latitude: -70
+      globe:
+    bounds: [-3950000.000, 3950000.000, -3950000.000, 4350000.000]
+
+
+# list of keys to add text to the image.  The keys must have a 'position' and 'text' value and optional 'kwargs' dict.
+image_labels:
+  - title
+  - attribution
+  - source_attribution
+
+# concentration keys are promoted to top level before calling to image.py.
+concentration:
+  output_postfix: conc
+
+  title:
+    position: [.038, .953]        # [north.image.axes[left]ish, north.image.axes[bottom+height+nudge]
+    text: Sea Ice Concentration, {date}
+    kwargs:
+      fontsize: 16.
+      color: white
+
+  monthly:
+    sub-title:
+      text: Total Area = {value} million sq km
+      kwargs:
+        fontsize: 11
+        color: white
+        horizontalalignment: center
+        verticalalignment: top
+    namedcolors:
+      extent_line: '#f80083'
+
+  daily:
+    namedcolors:
+      extent_line: '#f6940e'
+
+  median_extent_line: true
+
+  colorbar:
+    tick_color: w
+    tick_fontsize: 8
+    bounds: [0,  21]
+    ticks: [0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.]
+
+  # Color names inside {} are replaced by their values in the colors section
+  # via config._substitute_colortable().
+  colortable:
+    - '{ocean}'   # 0-5
+    - '{ocean}'   # 5-10
+    - '{ocean}'   # 10-15
+    - '#137AE3'   # 15-20
+    - '#1684EB'   # 20-25
+    - '#178CF2'   # 25-30
+    - '#1994F9'   # 30-35
+    - '#1A9BFC'   # 35-40
+    - '#23A3FC'   # 40-45
+    - '#31ABFC'   # 45-50
+    - '#45B4FC'   # 50-55
+    - '#57BCFC'   # 55-60
+    - '#6AC4FC'   # 60-65
+    - '#7DCCFD'   # 65-70
+    - '#94D5FD'   # 70-75
+    - '#A8DCFD'   # 75-80
+    - '#BCE4FE'   # 80-85
+    - '#D0ECFE'   # 85-90
+    - '#E4F4FE'   # 90-95
+    - '#F7FCFF'   # 95-100
+    - '{pole}'    # 251pole
+    - 'black'     # 252unused
+    - '{coast}'   # 253coast
+    - '{land}'    # 254land
+    - '{missing}' # 255missing
+
+    # These could be computed via simple commands:
+    # ranges = np.linspace(0, 100.0, 21)
+    # ranges[-1] = 100.0001
+    # ranges = np.append(ranges, [251.001, 252.001, 253.001, 254.001, 255.001])
+  colorbounds:
+    - 0.
+    - 5.
+    - 10.
+    - 15.
+    - 20.
+    - 25.
+    - 30.
+    - 35.
+    - 40.
+    - 45.
+    - 50.
+    - 55.
+    - 60.
+    - 65.
+    - 70.
+    - 75.
+    - 80.
+    - 85.
+    - 90.
+    - 95.
+    - 100.0001
+    - 251.001
+    - 252.001
+    - 253.001
+    - 254.001
+    - 255.001
+
+  legend:
+    namedcolor_name: 'extent_line'
+    text: 'median ice edge 1981-2010'
+    text_color: 'white'
+    fontsize: 8
+    loc: 'lower right'
+    handlesize: 1
+
+
+# extent keys are promoted to top level before calling to image.py.
+extent:
+  output_postfix: extn
+
+  title:
+    position: [.038, .953]
+    text: Sea Ice Extent, {date}
+    kwargs:
+      fontsize: 16.
+      color: white
+
+  monthly:
+    sub-title:
+      text: 'Total extent = {value} million sq km'
+      kwargs:
+        fontsize: 11
+        color: white
+        horizontalalignment: center
+        verticalalignment: top
+    namedcolors:
+      extent_line: '#f80083'
+
+  daily:
+    namedcolors:
+      extent_line: '#f6940e'
+
+  median_extent_line: true
+
+  # Color names inside {} are replaced by their values in the colors section
+  # via config._substitute_colortable().
+  colortable:
+    - '{ocean}'   # 0ocean
+    - 'white'     # 1ice
+    - '{pole}'    # 251pole
+    - 'black'     # 252unused
+    - '{coast}'   # 253coast
+    - '{land}'    # 254land
+    - '{missing}' # 255missing
+
+  colorbounds:
+    - 0.
+    - 1.
+    - 100.0001
+    - 251.001
+    - 252.001
+    - 253.001
+    - 254.001
+    - 255.001
+
+  legend:
+    namedcolor_name: 'extent_line'
+    text: 'median ice edge 1981-2010'
+    text_color: 'white'
+    fontsize: 8
+    loc: 'lower right'
+    handlesize: 1
+
+# anomaly keys are promoted to top level before calling to image.py.
+anomaly:
+  output_postfix: anom
+
+  image:
+    locations_path_effects:
+      # Set to a list of dictionaries with 'name' found in image.locations and
+      # 'foreground' the color you want under your text.color
+      - 'name': 'Europe'
+        'foreground': '#777777'
+
+  south:
+    image:
+      locations:
+        - 'name': "West\nAntarctica"
+          'coords': [-126., -81, ]
+        - 'name': "East\nAntarctica"
+          'coords': [52., -77., ]
+        - 'name': "South America"
+          'coords': [-75.5, -55.25]
+          'rotation': vertical
+          'color': black
+
+  title:
+    position: [.038, .953]        # [north.image.axes[left]ish, north.image.axes[bottom+height+nudge]
+    text: Sea Ice Concentration Anomalies, {date}
+    kwargs:
+      fontsize: 16.
+      color: white
+
+  north:
+    legend:
+      namedcolor_name: 'pole'
+      edgecolor: 'black'
+      text: 'Area not imaged by sensor'
+      text_color: 'black'
+      fontsize: 8
+      loc: 'lower right'
+      handlesize: 1
+
+  monthly:
+    namedcolors:
+      pole: '#bbbbbb'
+    sub-title:
+      text: Total anomaly = {value} million sq km
+      kwargs:
+        fontsize: 11
+        color: white
+        horizontalalignment: center
+        verticalalignment: top
+
+  colorbar:
+    extend: 'both'
+    tick_color: w
+    tick_fontsize: 8
+    bounds: [0,  24]
+    ticks: [-50., -40., -30., -20., -10., 0., 10., 20., 30., 40., 50.]
+
+  # Color names inside {} are replaced by their values in the colors section
+  # via config._substitute_colortable().
+  colortable:
+    - '#053061'
+    - '#114781'
+    - '#1d5fa2'
+    - '#2b73b3'
+    - '#3a87bd'
+    - '#4f9bc7'
+    - '#71b0d3'
+    - '#93c6de'
+    - '#b1d5e7'
+    - '#cce2ef'
+    - '#deebf2'
+    - 'white'   # '#eff3f5'
+    - '#f8f1ed'
+    - '#fbe5d8'
+    - '#fcd7c2'
+    - '#f8bfa4'
+    - '#f4a683'
+    - '#e8896c'
+    - '#db6b55'
+    - '#cc4c44'
+    - '#bd2d35'
+    - '#a81529'
+    - '#870a24'
+    - '{pole}'    # 251pole'
+    - 'black'     # 252unused'
+    - '{coast}'   # 253coast'
+    - '{land}'    # 254land'
+    - '{missing}' # 255missing'
+
+    # These could be computed via simple commands:
+    # ranges = np.linspace(-50.0, 50.0, 21)
+    # ranges = np.append([-100.0], ranges)
+    # ranges = np.append(ranges, [100.0001])
+    # ranges = np.append(ranges, [251.001, 252.001, 253.001, 254.001, 255.001])
+  colorbounds:
+    - -100.0
+    - -50.0
+    - -45.0
+    - -40.0
+    - -35.0
+    - -30.0
+    - -25.0
+    - -20.0
+    - -15.0
+    - -10.0
+    - -5.0
+    - -0.001
+    - 0.001
+    - 5.0
+    - 10.0
+    - 15.0
+    - 20.0
+    - 25.0
+    - 30.0
+    - 35.0
+    - 40.0
+    - 45.0
+    - 50.0
+    - 100.0001
+    - 251.001
+    - 252.001
+    - 253.001
+    - 254.001
+    - 255.001
+
+
+trend:
+  output_postfix: trend
+  image:
+    locations_path_effects:
+      # Set to a list of dictionaries with 'name' found in image.locations and
+      # 'foreground' the color you want under your text.color
+      - 'name': 'Europe'
+        'foreground': '#777777'
+
+  south:
+    image:                        # Same as ANOMALY
+      locations:
+        - 'name': "West\nAntarctica"
+          'coords': [-126., -81, ]
+        - 'name': "East\nAntarctica"
+          'coords': [52., -77., ]
+        - 'name': "South America"
+          'coords': [-75.5, -55.25]
+          'rotation': vertical
+          'color': black
+
+  title:                   # Same as ANOMALY + word change
+    position: [.038, .953]        # [north.image.axes[left]ish, north.image.axes[bottom+height+nudge]
+    text: Sea Ice Concentration Trends, {date}
+    kwargs:
+      fontsize: 16.
+      color: white
+
+  north:
+    legend:
+      namedcolor_name: 'pole'
+      edgecolor: 'black'
+      text: 'Area not imaged by sensor'
+      text_color: 'black'
+      fontsize: 8
+      loc: 'lower right'
+      handlesize: 1
+
+  monthly:
+    namedcolors:
+      pole: '#bbbbbb'
+
+  colorbar:
+    extend: 'both'
+    tick_color: w
+    tick_fontsize: 8
+    bounds: [0,  24]
+    ticks: [-20., -18., -16., -14., -12., -10, -8., -6., -4., -2., 0., 2., 4., 6., 8., 10., 12., 14., 16., 18., 20.]
+    label:
+      text: per decade
+      kwargs:
+        fontsize: 8.
+        color: w
+
+  colortable:
+    - '#053061'
+    - '#114781'
+    - '#1d5fa2'
+    - '#2b73b3'
+    - '#3a87bd'
+    - '#4f9bc7'
+    - '#71b0d3'
+    - '#93c6de'
+    - '#b1d5e7'
+    - '#cce2ef'
+    - '#deebf2'
+    - 'white'   # '#eff3f5'
+    - '#f8f1ed'
+    - '#fbe5d8'
+    - '#fcd7c2'
+    - '#f8bfa4'
+    - '#f4a683'
+    - '#e8896c'
+    - '#db6b55'
+    - '#cc4c44'
+    - '#bd2d35'
+    - '#a81529'
+    - '#870a24'
+    - '{pole}'    # 251pole'
+    - 'black'     # 252unused'
+    - '{coast}'   # 253coast'
+    - '{land}'    # 254land'
+    - '{missing}' # 255missing'
+
+  colorbounds:
+    - -100.0
+    - -20.0
+    - -18.0
+    - -16.0
+    - -14.0
+    - -12.0
+    - -10.0
+    - -8.0
+    - -6.0
+    - -4.0
+    - -2.0
+    - -0.001
+    - 0.001
+    - 2.0
+    - 4.0
+    - 6.0
+    - 8.0
+    - 10.0
+    - 12.0
+    - 14.0
+    - 16.0
+    - 18.0
+    - 20.0
+    - 100.0001
+    - 251.001
+    - 252.001
+    - 253.001
+    - 254.001
+    - 255.001
+
+
+blue_marble:
+  alpha: 0  # transparent background
+  gamma: 0.85
+  image:
+    axes: [0.037, 0.071, 0.96, 0.96]  # left, bottom, width, height
+    locations_text_kwargs:
+      fontsize: 9
+  canvas:
+    pixel_dims: [400, 430]
+    hires_factor: 3.7
+
+  # Nest another blue marble entry for containing
+  # config specifically for the blue marble image.
+  blue_marble_image:
+    bm_dir: '/projects/DATASETS/BM/world_8km'
+    bm_filename: 'world.topo.200408.3x5400x2700.png'
+    pixel_size: 0.06666666666666667  # In degrees
+    projection:
+      bounds: [-180.0, 180.0, -90.0, 90.0]  # Native bounds
+    north:
+      projection:
+        ccrs:
+          central_latitude: 78.0
+          central_longitude: -45.0
+          satellite_height: 9000000.0
+    south:
+      projection:
+        ccrs:
+          central_latitude: -78.0
+          central_longitude: 0.0
+          satellite_height: 9000000.0
+  south:
+    image:
+      locations:
+      - 'name': "South America"
+        'coords': [-75.5, -55.25]
+        'rotation': horizontal
+      - 'name': "West\nAntarctica"
+        'coords': [-126., -81, ]
+        'color': 'black'
+      - 'name': "East\nAntarctica"
+        'coords': [52., -77., ]
+        'color': 'black'
+  north:
+    image:
+      locations:
+        - 'name': Greenland
+          'coords': [-43.6043, 77.2]
+          'color': black
+        - 'name': Alaska
+          'coords': [-149.49, 65.2008]
+        - 'name': Russia
+          'coords': [145., 67.]
+        - 'name': Canada
+          'coords': [-102, 58]
+        - 'name': Europe
+          'coords': [6, 51.5]
+  attribution:
+    text: National Snow and Ice Data Center/NASA Earth Observatory
+    position: [0.005, 0.55]  # [0.005, image.axes[bottom] + (image.axes[height] * 0.5)]
+    kwargs:
+      verticalalignment: center
+      horizontalalignment: left
+      color: black
+      fontsize: 10
+  source_attribution:
+    position: [0.005, 0.98]
+    kwargs:
+      fontsize: 7
+      color: black
+      rotation: 0.0
+      horizontalalignment: left
+      verticalalignment: top
+  title:
+    position: [0.517, 0.075]  # [image.axes[left] + (image.axes[width] * 0.5), image.axes[bottom] + 0.004]
+    text: '{date}'
+    kwargs:
+      fontsize: 10
+      color: black
+      horizontalalignment: center
+      verticalalignment: center
+  daily:
+    title:
+      dateformat: '%d %B %Y'
+  monthly:
+    title:
+      dateformat: '%B %Y'
+  extent:
+    legend:
+      loc: 'lower center'
+      text_color: black
+      fontsize: 9
+      bbox_to_anchor: [0.517, 0.012]  # [image.axes[left] + (image.axes[width] * 0.5), image.axes[bottom] - 0.059]
+  concentration:
+    colorbar:
+      axes: [0.117, 0.028, 0.8, 0.03]  # left, bottom, width, height
+      orientation: horizontal
+      tick_color: black
+      tick_fontsize: 8
+      ticks: [20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.]
+      bounds: [3, 21]
+    legend:
+      text: "median ice edge\n1981-2010"
+      text_color: black
+      loc: [.73, .005]
+  missing_legend:
+    fontsize: 9
+    alpha: 0
+  no_data:
+    position: [.5, .6]
+
+google:
+  google_image: True
+  image:
+    axes: [0, 0, 1, 1]
+  canvas:
+    pixel_dims: [600, 900]
+    dpi: 72
+  projection:
+    pixel_width: 0.6  # 360 deg / 600 px
+    pixel_height: 0.2  # 180 deg / 900 px
+    bounds: [-180.0, 180.0, -90.0, 90.0]
+  landmask:
+    filename: /share/data/LandCover/gridded/0.2degree/0.2degree_loci_land50_coast0km.1800x900.bin
+    shape: [900, 1800]
+    ice_allowed_value: 255
+
+
+# Science On a Sphere
+sos:
+  image:
+    axes: [0, 0, 1, 1]
+  canvas:
+    pixel_dims: [4096, 2048]
+    dpi: 72
+  projection:
+    pixel_width: .087890625  # 360 deg / 4096 px
+    pixel_height: .087890625  # 180 deg / 2048 px
+    bounds: [-180.0, 180.0, -90.0, 90.0]
+
+  landmask:
+    filename: /share/data/LandCover/gridded/0.09degree/0.09degree_loci_land50_coast0km.4096x2048.bin
+    shape: [2048, 4096]
+    ice_allowed_value: 255
+
+# Temporality customizations.
+daily:
+  title:
+    dateformat: '%d %b %Y'
+
+monthly:
+  title:
+    dateformat: '%b %Y'
+
+
+# Keys common to all images, and always at top level
+# --------------------------------------------------
+namedcolors:
+  background: '#4f4f4f'
+  ocean: '#093c70'
+  lake: '#133399'
+  pole:  '#4f4f4f'
+  coast: 'black'
+  land: '#777777'
+  missing: '#e9cb00'
+
+attribution:
+  text: National Snow and Ice Data Center, University of Colorado Boulder
+  kwargs:
+    fontsize: 8.
+    rotation: 90
+    color: white
+    horizontalalignment: right
+    verticalalignment: bottom
+
+source_attribution:
+  text: ''
+  kwargs:
+    fontsize: 8.
+    rotation: 90.
+    color: white
+    horizontalalignment: right
+    verticalalignment: bottom
+
+
+no_data:
+  position: [.4, .5]
+  text: "NO\nDATA"
+  kwargs:
+    fontsize: 60.0
+    color: '#e9cb00'
+    horizontalalignment: 'center'
+    verticalalignment: 'center'
+    weight: 'bold'
+
+
+missing_legend:
+  namedcolor_name: 'missing'
+  text: 'MISSING'
+  text_color: 'black'
+  fontsize: 8
+  loc: 'upper right'
+  handlesize: 1
+  alpha: 1
+  legend_bg_color: '#999999'
+
+
+canvas:
+  pixel_dims: [420, 500]
+  dpi: 72
+  # Scale is applied to pixel_dims and any key with 'fontsize' in it.
+  # this allows multiple sizes to be generated.
+  scale: 1.0
+  # contour_width is the linewidth of drawn contours (median extent line)
+  # This is also scaled according to the scale factor define above.
+  contour_width: 1
+  hires_factor: 3.48
+
+custom_filename: false
+pickle_path: "/share/apps/seaice/cache/reprojected_blue_marble_{hemi}.p"

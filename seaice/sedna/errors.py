@@ -1,0 +1,2 @@
+class SednaError(Exception):
+    pass

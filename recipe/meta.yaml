@@ -1,0 +1,194 @@
+package:
+  name: seaice
+  version: "2.3.1"
+
+source:
+  path: ../
+
+build:
+  number: {{ environ.get('BUILD_NUMBER', 0) }}
+  preserve_egg_dir: True
+  script: invoke test.build && python setup.py install
+
+  entry_points:
+    - monthly_with_statistics = seaice.tools.xlsify.monthly_with_statistics:monthly_with_statistics
+    - rates_of_change = seaice.tools.xlsify.rates_of_change:rates_of_change
+    - min_max_rankings = seaice.tools.xlsify.min_max_rankings:min_max_rankings
+    - daily_extent = seaice.tools.xlsify.daily_extent:daily_extent
+    - daily_extent_global = seaice.tools.xlsify.daily_extent_global:daily_extent_global
+    - regional_daily = seaice.tools.xlsify.regional_daily:regional_daily
+    - regional_monthly = seaice.tools.xlsify.regional_monthly:regional_monthly
+    - monthly_by_year = seaice.tools.xlsify.monthly_by_year:monthly_by_year
+    - monthly_by_year_global = seaice.tools.xlsify.monthly_by_year_global:monthly_by_year_global
+    - sea_ice_climatology_csvs = seaice.tools.csvify.sea_ice_climatology:sea_ice_climatology
+    - sea_ice_extent_daily_csvs = seaice.tools.csvify.sea_ice_extent_daily:sea_ice_extent_daily
+    - sea_ice_extent_monthly_csvs = seaice.tools.csvify.sea_ice_extent_monthly:sea_ice_extent_monthly
+    - plot_monthly_ice_extent = seaice.tools.plotter.monthly_extent:monthly_extent
+    - plot_monthly_ice_anomaly = seaice.tools.plotter.monthly_anomaly:monthly_anomaly
+    - plot_daily_ice_extent = seaice.tools.plotter.daily_extent:daily_extent
+    - process_latest_daily = seaice.tools.process_latest_daily:process_latest_daily
+    - process_latest_monthly = seaice.tools.process_latest_monthly:process_latest_monthly
+
+    - monthly_files_from_dailies = seaice.data.cli.monthly_files_from_dailies:monthly_files_from_dailies
+
+    - seaicefilemapper = seaice.filemapper.remap:remap
+
+    - sii_image = seaice.images.cli.sii_image:sii_image
+    - sii_image_latest = seaice.images.cli.sii_image_latest:sii_image_latest
+    - sii_image_sos = seaice.images.cli.sii_image_sos:sii_image_sos
+    - sii_image_google_earth = seaice.images.cli.sii_image_google_earth:sii_image_google_earth
+    - sii_image_geotiff = seaice.images.cli.sii_image_geotiff:sii_image_geotiff
+
+    - sii_shp = seaice.shapefiles.cli.sii_shp:cli
+
+    - update_sea_ice_statistics_daily = seaice.sedna.cli.update_sea_ice_statistics_daily:update_sea_ice_statistics_daily
+    - initialize_sea_ice_statistics_daily = seaice.sedna.cli.initialize_sea_ice_statistics_daily:initialize_sea_ice_statistics_daily
+    - sea_ice_statistics_monthly = seaice.sedna.cli.sea_ice_statistics_monthly:sea_ice_statistics_monthly
+    - validate_daily_data = seaice.sedna.cli.validate_daily_data:validate_daily_data
+
+requirements:
+  build:
+    - flake8 >=3.2.1,<3.3
+    - flake8-quotes >=0.8.1,<0.9
+    - invoke >=0.13.0,<0.14.0
+    - musher >=0.6.3,<0.7.0
+    - nose >=1.3.7,<2
+    - nose-exclude >=0.5.0,<0.6
+
+    #######################################################
+    # below packages are the same as the run requirements #
+    #######################################################
+
+    # Pinning icu solves "missing shared library" error for libnetcdf.so.15
+    - icu ==58.2
+
+    - python >=3.6,<3.7
+    - cartopy >=0.17.0,<0.18
+    - click >=6.7,<7
+    - decorator >=4.0.10,<4.1.0
+    - fiona >=1.7.1,<2.0.0
+    - gdal >=2.3.3,<3.0.0
+    - imagemagick >=7.0.6,<8.0.0
+    - json-c >=0.13.1,<0.14
+    - matplotlib >=2.2.0,<3.0.0
+    - netcdf4 >=1.2.6,<2.0.0
+    - numpy >=1.16.0,<1.17.0
+    - pandas >=0.24.0,<0.25.0
+    - plotly >=3.4.2,<4.0.0a
+    - python-dateutil >=2.6.0,<2.7
+    - pyyaml >=3.11,<4.0.0a
+    - rasterio >=1.0.18,<1.1.0
+    - scipy >=1.3.0,<1.4.0
+    - shapely >=1.5.17,<2.0.0
+    - statsmodels >=0.10.0,<0.11.0
+    - xlrd ==1.0.0
+    - xlsxwriter >=1.1.4,<2.0  # needed for pd.ExcelWriter(engine='xlsxwriter')
+
+  run:
+    # Pinning icu solves "missing shared library" error for libnetcdf.so.15
+    - icu ==58.2
+
+    - python >=3.6,<3.7
+    - cartopy >=0.17.0,<0.18
+    - click >=6.7,<7
+    - decorator >=4.0.10,<4.1.0
+    - fiona >=1.7.1,<2.0.0
+    - gdal >=2.3.3,<3.0.0
+    - imagemagick >=7.0.6,<8.0.0
+    - json-c >=0.13.1,<0.14
+    - matplotlib >=2.2.0,<3.0.0
+    - netcdf4 >=1.2.6,<2.0.0
+    - numpy >=1.16.0,<1.17.0
+    - pandas >=0.24.0,<0.25.0
+    - plotly >=3.4.2,<4.0.0a
+    - python-dateutil >=2.6.0,<2.7
+    - pyyaml >=3.11,<4.0.0a
+    - rasterio >=1.0.18,<1.1.0
+    - scipy >=1.3.0,<1.4.0
+    - shapely >=1.5.17,<2.0.0
+    - statsmodels >=0.10.0,<0.11.0
+    - xlrd ==1.0.0
+    - xlsxwriter >=1.1.4,<2.0  # needed for pd.ExcelWriter(engine='xlsxwriter')
+
+test:
+  imports:
+    - seaice.nasateam
+
+    - seaice.tools
+    - seaice.tools.csvify
+    - seaice.tools.csvify.sea_ice_extent_daily
+    - seaice.tools.csvify.sea_ice_climatology
+    - seaice.tools.csvify.sea_ice_extent_monthly
+    - seaice.tools.plotter
+    - seaice.tools.plotter.daily_extent
+    - seaice.tools.plotter.monthly_extent
+    - seaice.tools.plotter.monthly_anomaly
+    - seaice.tools.warp
+    - seaice.tools.xlsify
+    - seaice.tools.xlsify.daily_extent
+    - seaice.tools.xlsify.min_max_rankings
+    - seaice.tools.xlsify.monthly_by_year
+    - seaice.tools.xlsify.monthly_with_statistics
+    - seaice.tools.xlsify.rates_of_change
+    - seaice.tools.xlsify.regional_daily
+    - seaice.tools.xlsify.regional_monthly
+
+    - seaice.data
+
+    - seaice.datastore
+
+    - seaice.logging
+
+    - seaice.shapefiles
+
+    - seaice.timeseries
+
+  commands:
+    # seaice.tools
+    - monthly_with_statistics --help
+    - rates_of_change --help
+    - min_max_rankings --help
+    - daily_extent --help
+    - sea_ice_climatology_csvs --help
+    - monthly_by_year --help
+    - regional_daily --help
+    - regional_monthly --help
+    - sea_ice_extent_daily_csvs --help
+    - sea_ice_extent_monthly_csvs --help
+    - plot_monthly_ice_extent --help
+    - plot_monthly_ice_anomaly --help
+    - plot_daily_ice_extent --help
+    - daily_extent_global --help
+    - monthly_by_year_global --help
+
+    # seaicedata
+    - monthly_files_from_dailies --help
+
+    # seaicefilemapper
+    - seaicefilemapper --help
+
+    # seaiceimages
+    - sii_image --help
+    - sii_image --version
+    - sii_image_latest --help
+    - sii_image_sos --help
+    - sii_image_google_earth --help
+    - sii_image_geotiff --help
+
+    # seaiceshapefiles
+    - sii_shp --version
+    - sii_shp --help
+    - sii_shp --debug_config
+
+    # sedna
+    - update_sea_ice_statistics_daily --help
+    - initialize_sea_ice_statistics_daily --help
+    - sea_ice_statistics_monthly --help
+    - validate_daily_data --help
+
+
+
+about:
+  home: https://bitbucket.org/nsidc/seaice
+  license: MIT
+  summary: CLIs and libraries for sea ice related computations.

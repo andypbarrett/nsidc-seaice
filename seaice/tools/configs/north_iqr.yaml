@@ -1,0 +1,21 @@
+data_store: /share/apps/seaice/datastore/daily.p
+
+output_file: N_iqr_timeseries.png
+
+hemi: N
+
+month_bounds: [-3, 1]
+
+plot_mean: false
+plot_stdev: false
+
+plot_median: true
+plot_iqr: true
+plot_idr: true
+
+years:
+  record_low_year:
+    color: rgb(3, 88, 38)
+    dash: 8px
+  current:
+    color: rgb(0, 152, 244)

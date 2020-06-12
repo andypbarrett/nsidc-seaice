@@ -1,0 +1,4 @@
+'search_paths':
+  - ../../../../test_data/sedna/
+'data_store': test_monthly.p
+'daily_data_store': daily.p

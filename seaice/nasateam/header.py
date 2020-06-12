@@ -1,0 +1,27 @@
+# nasateam outputfile header information
+
+NASATEAM_HEADER_LENGTH = 300
+NASATEAM_HEADER = [('missing_data', 'a6'),
+                   ('grid_cols', 'a6'),
+                   ('grid_rows', 'a6'),
+                   ('unused1', 'a6'),
+                   ('latitude_enclosed', 'a6'),
+                   ('greenwich_orientation', 'a6'),
+                   ('unused2', 'a6'),
+                   ('pole_j', 'a6'),
+                   ('pole_i', 'a6'),
+                   ('instrument', 'a6'),
+                   ('descriptors', 'a6'),
+                   ('starting_day_of_year', 'a6'),
+                   ('start_hour', 'a6'),
+                   ('start_minute', 'a6'),
+                   ('ending_day_of_year', 'a6'),
+                   ('end_hour', 'a6'),
+                   ('end_minute', 'a6'),
+                   ('year', 'a6'),
+                   ('julian_day', 'a6'),
+                   ('channel_descriptor', 'a6'),
+                   ('scale_factor', 'a6'),
+                   ('filename', 'a24'),
+                   ('image_title', 'a80'),
+                   ('data_information', 'a70')]

@@ -1,0 +1,5 @@
+Year, Month, Day,     Extent,    Missing, Source Data
+YYYY,    MM,  DD, 10^6 sq km, 10^6 sq km, Source data product web sites: http://nsidc.org/data/nsidc-0081.html and http://nsidc.org/data/nsidc-0051.html
+1978,    10,  26,     17.624,      0.000, ['ftp://sidads.colorado.edu/pub/DATASETS/nsidc0051_gsfc_nasateam_seaice/final-gsfc/south/daily/1978/nt_19781026_n07_v1.1_s.bin']
+1981,    10,  26,     17.624,      0.000, ['ftp://sidads.colorado.edu/pub/DATASETS/nsidc0051_gsfc_nasateam_seaice/final-gsfc/south/daily/1981/nt_19811026_n07_v1.1_s.bin']
+2016,    01,  25,      3.562,      0.000,"['ftp://sidads.colorado.edu/pub/DATASETS/nsidc0081_nrt_nasateam_seaice/south/nt_20160124_f17_nrt_s.bin', 'ftp://sidads.colorado.edu/pub/DATASETS/nsidc0081_nrt_nasateam_seaice/south/nt_20160125_f17_nrt_s.bin']"

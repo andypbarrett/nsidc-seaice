@@ -1,0 +1,28 @@
+North Regional Sea Ice Monthly
+National Snow and Ice Data Center
+http://nsidc.org
+
+The Excel workbook contains average monthly sea ice extent and area, and lowest
+to highest monthly extent rankings for 1978 to present, in square kilometers, by
+region of the Arctic Ocean.
+
+Data are from the NSIDC Sea Ice Index (http://nsidc.org/data/seaice_index),
+using data from the Defense Meteorological Satellite Program (DMSP) series of
+passive microwave remote sensing instruments. The Sea Ice Index is based on the
+data sets, Near-Real-time DMSP SSM/I-SSMIS Daily Polar Gridded Sea Ice
+Concentrations (http://nsidc.org/data/nsidc-0081), and the NASA-produced Sea Ice
+Concentrations from Nimbus-7 SMMR and DMSP SSM/I Passive Microwave Data
+(http://nsidc.org/data/nsidc-0051).
+
+For more information, see the Sea Ice Index user guide (http://nsidc.org/data/g02135).
+
+For questions or assistance, contact NSIDC User Services at nsidc@nsidc.org.
+
+Citation
+
+As a condition of using these data, you must cite the use of this data set. See
+the Sea Ice Index product landing page (https://nsidc.org/data/g02135) for
+citation format.
+
+For figures or illustrations made with the data, the credit in the caption
+should read "Credit: Sea Ice Index, National Snow and Ice Data Center."

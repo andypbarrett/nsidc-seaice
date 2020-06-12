@@ -1,0 +1,30 @@
+data_store: /share/apps/seaice/datastore/daily.p
+
+output_file: asina_N_stddev_timeseries.png
+
+hemi: N
+
+month_bounds: [-4, 0]
+
+plot_mean: true
+plot_stdev: true
+nstdevs: 2
+
+legend:
+  11:
+    legend_side: 'left'
+
+
+years:
+  record_low_year:
+    dash: 8px
+  years_before_4:
+    color: rgb(166, 9, 172)
+  years_before_3:
+    color: rgb(177, 89, 40)
+  years_before_2:
+    color: rgb(255, 127, 0)
+  years_before_1:
+    color: rgb(3, 88, 38)
+  current:
+    color: rgb(0, 152, 244)

@@ -1,0 +1,99 @@
+# mapping to describe copying of output files to webnamed files.
+daily:
+  step_by: 'days'
+
+  destination_root: '/share/apps/seaice/website/images/daily_images'
+  source_root: '/share/apps/seaice/'
+
+
+  files: # 'Source Pattern': 'destination_filename'
+    - 'plots/N_iqr_timeseries.png': 'N_iqr_timeseries.png'
+    - 'plots/N_iqr_timeseries_thumb.png': 'N_iqr_timeseries_thumb.png'
+    - 'plots/N_stddev_timeseries.png': 'N_stddev_timeseries.png'
+    - 'plots/N_stddev_timeseries_thumb.png': 'N_stddev_timeseries_thumb.png'
+
+    - 'plots/S_iqr_timeseries.png': 'S_iqr_timeseries.png'
+    - 'plots/S_iqr_timeseries_thumb.png': 'S_iqr_timeseries_thumb.png'
+    - 'plots/S_stddev_timeseries.png': 'S_stddev_timeseries.png'
+    - 'plots/S_stddev_timeseries_thumb.png': 'S_stddev_timeseries_thumb.png'
+
+    - 'plots/asina_N_iqr_timeseries.png': 'asina_N_iqr_timeseries.png'
+    - 'plots/asina_N_iqr_timeseries_thumb.png': 'asina_N_iqr_timeseries_thumb.png'
+    - 'plots/asina_N_stddev_timeseries.png': 'asina_N_stddev_timeseries.png'
+    - 'plots/asina_N_stddev_timeseries_thumb.png': 'asina_N_stddev_timeseries_thumb.png'
+
+    - 'plots/asina_S_iqr_timeseries.png': 'asina_S_iqr_timeseries.png'
+    - 'plots/asina_S_iqr_timeseries_thumb.png': 'asina_S_iqr_timeseries_thumb.png'
+    - 'plots/asina_S_stddev_timeseries.png': 'asina_S_stddev_timeseries.png'
+    - 'plots/asina_S_stddev_timeseries_thumb.png': 'asina_S_stddev_timeseries_thumb.png'
+
+
+    - 'images/north/daily/images/{year}/{month}_{mon_abbrev}/N_{yyyymmdd}_conc_blmrbl_hires_{version_string}.png': 'N_bm_conc.png'
+    - 'images/north/daily/images/{year}/{month}_{mon_abbrev}/N_{yyyymmdd}_conc_blmrbl_{version_string}.png': 'N_bm_conc_web_file.png'
+    - 'images/north/daily/images/{year}/{month}_{mon_abbrev}/N_{yyyymmdd}_conc_hires_{version_string}.png': 'N_daily_concentration_hires.png'
+    - 'images/north/daily/images/{year}/{month}_{mon_abbrev}/N_{yyyymmdd}_conc_{version_string}.png': 'N_daily_concentration.png'
+
+    - 'images/north/daily/images/{year}/{month}_{mon_abbrev}/N_{yyyymmdd}_extn_blmrbl_hires_{version_string}.png': 'N_bm_extent.png'
+    - 'images/north/daily/images/{year}/{month}_{mon_abbrev}/N_{yyyymmdd}_extn_blmrbl_{version_string}.png': 'N_bm_web_file.png'
+    - 'images/north/daily/images/{year}/{month}_{mon_abbrev}/N_{yyyymmdd}_extn_hires_{version_string}.png': 'N_daily_extent_hires.png'
+    - 'images/north/daily/images/{year}/{month}_{mon_abbrev}/N_{yyyymmdd}_extn_{version_string}.png': 'N_daily_extent.png'
+
+    - 'images/south/daily/images/{year}/{month}_{mon_abbrev}/S_{yyyymmdd}_conc_blmrbl_hires_{version_string}.png': 'S_bm_conc.png'
+    - 'images/south/daily/images/{year}/{month}_{mon_abbrev}/S_{yyyymmdd}_conc_blmrbl_{version_string}.png': 'S_bm_conc_web_file.png'
+    - 'images/south/daily/images/{year}/{month}_{mon_abbrev}/S_{yyyymmdd}_conc_hires_{version_string}.png': 'S_daily_concentration_hires.png'
+    - 'images/south/daily/images/{year}/{month}_{mon_abbrev}/S_{yyyymmdd}_conc_{version_string}.png': 'S_daily_concentration.png'
+
+    - 'images/south/daily/images/{year}/{month}_{mon_abbrev}/S_{yyyymmdd}_extn_blmrbl_hires_{version_string}.png': 'S_bm_extent.png'
+    - 'images/south/daily/images/{year}/{month}_{mon_abbrev}/S_{yyyymmdd}_extn_blmrbl_{version_string}.png': 'S_bm_web_file.png'
+    - 'images/south/daily/images/{year}/{month}_{mon_abbrev}/S_{yyyymmdd}_extn_hires_{version_string}.png': 'S_daily_extent_hires.png'
+    - 'images/south/daily/images/{year}/{month}_{mon_abbrev}/S_{yyyymmdd}_extn_{version_string}.png': 'S_daily_extent.png'
+
+
+
+monthly:
+  step_by: 'months'
+
+  destination_root: '/share/apps/seaice/website/images'
+  source_root: '/share/apps/seaice/'
+
+  files:
+    # northern hemisphere
+    - 'images/north/monthly/images/{month}_{mon_abbrev}/N_{yyyymm}_anom_hires_{version_string}.png': 'n_anom_hires.png'
+    - 'images/north/monthly/images/{month}_{mon_abbrev}/N_{yyyymm}_anom_{version_string}.png': 'n_anom.png'
+
+    - 'images/north/monthly/images/{month}_{mon_abbrev}/N_{yyyymm}_conc_blmrbl_hires_{version_string}.png': 'N_monthly_bm_conc.png'
+    - 'images/north/monthly/images/{month}_{mon_abbrev}/N_{yyyymm}_conc_blmrbl_{version_string}.png': 'N_monthly_bm_conc_web.png'
+    - 'images/north/monthly/images/{month}_{mon_abbrev}/N_{yyyymm}_conc_hires_{version_string}.png': 'n_conc_hires.png'
+    - 'images/north/monthly/images/{month}_{mon_abbrev}/N_{yyyymm}_conc_{version_string}.png': 'n_conc.png'
+
+    - 'images/north/monthly/images/{month}_{mon_abbrev}/N_{yyyymm}_extn_blmrbl_hires_{version_string}.png': 'N_monthly_bm_extent.png'
+    - 'images/north/monthly/images/{month}_{mon_abbrev}/N_{yyyymm}_extn_blmrbl_{version_string}.png': 'N_monthly_bm_extent_web.png'
+    - 'images/north/monthly/images/{month}_{mon_abbrev}/N_{yyyymm}_extn_hires_{version_string}.png': 'n_extn_hires.png'
+    - 'images/north/monthly/images/{month}_{mon_abbrev}/N_{yyyymm}_extn_{version_string}.png': 'n_extn.png'
+
+    - 'images/north/monthly/images/{month}_{mon_abbrev}/N_{month}_trend_hires_{version_string}.png': 'n_trnd_hires.png'
+    - 'images/north/monthly/images/{month}_{mon_abbrev}/N_{month}_trend_{version_string}.png': 'n_trnd.png'
+
+    - 'plots/north/monthly/{month}_{mon_abbrev}/N_{month}_extent_anomaly_plot_hires_{version_string}.png': 'n_plot_hires.png'
+    - 'plots/north/monthly/{month}_{mon_abbrev}/N_{month}_extent_anomaly_plot_{version_string}.png': 'n_plot.png'
+
+    # southern hemisphere:
+    - 'images/south/monthly/images/{month}_{mon_abbrev}/S_{yyyymm}_anom_hires_{version_string}.png': 's_anom_hires.png'
+    - 'images/south/monthly/images/{month}_{mon_abbrev}/S_{yyyymm}_anom_{version_string}.png': 's_anom.png'
+
+    - 'images/south/monthly/images/{month}_{mon_abbrev}/S_{yyyymm}_conc_blmrbl_hires_{version_string}.png': 'S_monthly_bm_conc.png'
+    - 'images/south/monthly/images/{month}_{mon_abbrev}/S_{yyyymm}_conc_blmrbl_{version_string}.png': 'S_monthly_bm_conc_web.png'
+    - 'images/south/monthly/images/{month}_{mon_abbrev}/S_{yyyymm}_conc_hires_{version_string}.png': 's_conc_hires.png'
+    - 'images/south/monthly/images/{month}_{mon_abbrev}/S_{yyyymm}_conc_{version_string}.png': 's_conc.png'
+
+    - 'images/south/monthly/images/{month}_{mon_abbrev}/S_{yyyymm}_extn_blmrbl_hires_{version_string}.png': 'S_monthly_bm_extent.png'
+    - 'images/south/monthly/images/{month}_{mon_abbrev}/S_{yyyymm}_extn_blmrbl_{version_string}.png': 'S_monthly_bm_extent_web.png'
+
+    - 'images/south/monthly/images/{month}_{mon_abbrev}/S_{yyyymm}_extn_hires_{version_string}.png': 's_extn_hires.png'
+    - 'images/south/monthly/images/{month}_{mon_abbrev}/S_{yyyymm}_extn_{version_string}.png': 's_extn.png'
+
+    - 'images/south/monthly/images/{month}_{mon_abbrev}/S_{month}_trend_hires_{version_string}.png': 's_trnd_hires.png'
+    - 'images/south/monthly/images/{month}_{mon_abbrev}/S_{month}_trend_{version_string}.png': 's_trnd.png'
+
+    - 'plots/south/monthly/{month}_{mon_abbrev}/S_{month}_extent_anomaly_plot_hires_{version_string}.png': 's_plot_hires.png'
+    - 'plots/south/monthly/{month}_{mon_abbrev}/S_{month}_extent_anomaly_plot_{version_string}.png': 's_plot.png'

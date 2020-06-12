@@ -1,0 +1,5 @@
+recursive-include seaice/filemapper/ancillary *
+recursive-include seaice/images/ancillary *
+recursive-include seaice/logging/ancillary *
+recursive-include seaice/nasateam/pkg_data *
+recursive-include seaice/tools/configs *

@@ -1,0 +1,18 @@
+data_store: /share/apps/seaice/datastore/daily.p
+
+output_file: N_stddev_timeseries.png
+
+hemi: N
+
+month_bounds: [-3, 1]
+
+plot_mean: true
+plot_stdev: true
+nstdevs: 2
+
+years:
+  record_low_year:
+    color: rgb(3, 88, 38)
+    dash: 8px
+  current:
+    color: rgb(0, 152, 244)
