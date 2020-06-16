@@ -59,10 +59,14 @@ def concentration_daily_as_xarray(hemisphere, date, search_paths, apply_filter=T
 
 def concentration_daily_for_year_to_dataset(hemisphere, year, search_paths, apply_filter=True):
     """Returns a xarray.Dataset containing a year of sea ice concentrations"""
-    # TODO: add lat and lon
+    from seaice.nasateam.coord_grids import NORTH_LAT_GRID, NORTH_LON_GRID
+    
     dates = pd.date_range(f'{year}-01-01', f'{year}-12-31', freq='D')
     da = xr.concat([concentration_daily_as_xarray(hemisphere, d,
                                                   search_paths,
                                                   apply_filter=True) for d in dates], 'time')
+    da.coords['lat'] = (['y','x'], NORTH_LAT_GRID)
+    da.coords['lon'] = (['y','x'], NORTH_LON_GRID)
+    
     return da.to_dataset(name='sic')
 
