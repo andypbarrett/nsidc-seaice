@@ -32,12 +32,6 @@ def concentration_daily_as_xarray(hemisphere, date, search_paths, apply_filter=T
     """Returns a sea concentration gridset as an xarray.DataArray with time and projected x, y 
        coordinates, and attributes
        """
-    #x0, x1 =  -3850000., 3750000. 
-    #y0, y1 = -5350000, 5850000. 
-    #dx, dy = 25000., 25000. 
-    #ncol, nrow = 304, 448 
-    #x = np.linspace(x0+dx/2., x1-dx/2., ncol) 
-    #y = np.linspace(y0+dy/2., x1-dy/2., nrow)
     x, y = grid_coordinates(hemisphere)
     x_da = xr.DataArray(x, coords={'x': x}, dims=['x'],
                      attrs={'long_name': 'x', 'units': 'm'})
@@ -61,3 +55,14 @@ def concentration_daily_as_xarray(hemisphere, date, search_paths, apply_filter=T
                                            #coast, pole hole and unused pixel values
     
     return da 
+
+
+def concentration_daily_for_year_to_dataset(hemisphere, year, search_paths, apply_filter=True):
+    """Returns a xarray.Dataset containing a year of sea ice concentrations"""
+    # TODO: add lat and lon
+    dates = pd.date_range(f'{year}-01-01', f'{year}-12-31', freq='D')
+    da = xr.concat([concentration_daily_as_xarray(hemisphere, d,
+                                                  search_paths,
+                                                  apply_filter=True) for d in dates], 'time')
+    return da.to_dataset(name='sic')
+
