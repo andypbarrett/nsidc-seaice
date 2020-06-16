@@ -54,9 +54,8 @@ PLATFORM_RANGES = {
 
 LAST_DAY_WITH_VALID_FINAL_DATA = dt.date(2018, 12, 31)
 
-DEFAULT_FINAL_SEA_ICE_PATHS = ['/media/apbarret/My\ Passport/Data/seaice/nsidc-0051/']
-DEFAULT_NRT_SEA_ICE_PATHS = ['/media/apbarret/My\ Passport/Data/seaice/nsidc-0081/']
-DEFAULT_SEA_ICE_PATHS = [*DEFAULT_FINAL_SEA_ICE_PATHS, *DEFAULT_NRT_SEA_ICE_PATHS]
+DEFAULT_FINAL_SEA_ICE_PATHS = ['.']
+DEFAULT_NRT_SEA_ICE_PATHS = ['.']
 
 
 DATA_FILENAME_MATCHER = re.compile(
@@ -103,6 +102,9 @@ if 'OVERRIDE_NASATEAM_CONSTANTS' in os.environ:
         log.info('overriding nasateam constant:{}:{}=>{}'.format(
             name, getattr(this_module, name), value))
         setattr(this_module, name, value)
+
+# Moved below override to ensure it uses overridden values
+DEFAULT_SEA_ICE_PATHS = [*DEFAULT_FINAL_SEA_ICE_PATHS, *DEFAULT_NRT_SEA_ICE_PATHS]
 
 SEASONS = {
     'spring': (3, 4, 5),
