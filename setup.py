@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(name='seaice',
       version='2.3.1',
-      description=('LOcal version of CLIs and libraries for sea ice related computations.'),
+      description=('Local version of CLIs and libraries for sea ice related computations.'),
       url='git@bitbucket.org:andypbarrett/seaice.git',
       author='NSIDC Development Team',
       author_email='programmers@nsidc.org',
