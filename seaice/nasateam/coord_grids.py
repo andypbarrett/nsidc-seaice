@@ -17,11 +17,11 @@ SOUTH_LON_GRID_FILENAME = os.path.join(mask_dir, 'pss25lons_v3.dat')
 
 
 NORTH_LAT_GRID = np.fromfile(NORTH_LAT_GRID_FILENAME,
-                             dtype=np.uint32).reshape(*NORTH_SHAPE) / GRID_COORD_SCALE
+                             dtype=np.int32).reshape(*NORTH_SHAPE) / GRID_COORD_SCALE
 NORTH_LON_GRID = np.fromfile(NORTH_LON_GRID_FILENAME,
-                              dtype=np.uint32).reshape(*NORTH_SHAPE) / GRID_COORD_SCALE
+                              dtype=np.int32).reshape(*NORTH_SHAPE) / GRID_COORD_SCALE
 
 SOUTH_LAT_GRID = np.fromfile(SOUTH_LAT_GRID_FILENAME,
-                              dtype=np.uint32).reshape(*SOUTH_SHAPE) / GRID_COORD_SCALE
+                              dtype=np.int32).reshape(*SOUTH_SHAPE) / GRID_COORD_SCALE
 SOUTH_LON_GRID = np.fromfile(SOUTH_LON_GRID_FILENAME,
-                              dtype=np.uint32).reshape(*SOUTH_SHAPE) / GRID_COORD_SCALE
+                              dtype=np.int32).reshape(*SOUTH_SHAPE) / GRID_COORD_SCALE
