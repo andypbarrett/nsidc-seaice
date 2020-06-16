@@ -1,8 +1,19 @@
 This is a modified version of the NSIDC sea ice CLI and tools.  It has been modified to work on a local directory structure. Routines to read binary sea ice concentration grids into xarray.DataArray and xarray.Dataset objects have been added.  This will make the sea ice data more "Analysis Ready".
 
+To make this work for a local directory structure, users will need to add a `override.yaml` file with key, value pairs for setting `DEFAULT_FINAL_SEA_ICE_PATHS` and `DEFAULT_NRT_SEA_ICE_PATHS`.  These are both `.` in `seaice.nasateam.constants`.
+
+```
+DEFAULT_FINAL_SEA_ICE_PATHS: ['local_path_to_NSIDC-0051']
+DEFAULT_NRT_SEA_ICE_PATHS: ['local_path_to_NSIDC-0081']
+```
+
+An environment variable `OVERRIDE_NASATEAM_CONSTANTS` containing the path to `override.yaml` will then need to be set.  For `bash` this would be:
+```
+$ export OVERRIDE_NASATEAM_CONSTANTS=path_to_override.yaml
+```
+
 TODO
 ---
-Modify setup to set directory path at setup  
 Add CLI to package binary grids into netCDF  
 Update README with install info for this version.
 
