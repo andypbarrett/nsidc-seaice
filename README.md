@@ -1,3 +1,10 @@
+This is a modified version of the NSIDC sea ice CLI and tools.  It has been modified to work on a local directory structure. Routines to read binary sea ice concentration grids into xarray.DataArray and xarray.Dataset objects have been added.  This will make the sea ice data more "Analysis Ready".
+
+TODO
+---
+Modify setup to set directory path at setup
+Add CLI to package binary grids into netCDF
+
 SeaIce
 ---
 
