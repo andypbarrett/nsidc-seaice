@@ -2,8 +2,9 @@ This is a modified version of the NSIDC sea ice CLI and tools.  It has been modi
 
 TODO
 ---
-Modify setup to set directory path at setup
-Add CLI to package binary grids into netCDF
+Modify setup to set directory path at setup  
+Add CLI to package binary grids into netCDF  
+Update README with install info for this version.
 
 SeaIce
 ---
